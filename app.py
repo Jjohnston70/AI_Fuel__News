@@ -169,9 +169,6 @@ with left_col:
             s for s in df['Source'].unique()
             if any(x in s for x in ["Oil", "Bloomberg", "Reuters", "EIA", "Colorado Traffic", "Colorado Weather", "DTN"])
         ]
-        ].unique()
-            if any(x in s for x in ["Oil", "Bloomberg", "Reuters", "EIA", "Colorado Traffic", "Colorado Weather", "DTN"])
-        ]
         erp_sources = [
             "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
             "Google Workspace Blog", "Intuit Developer Blog", "Stack Overflow - Apps Script",
@@ -181,3 +178,4 @@ with left_col:
         news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
         news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
+
