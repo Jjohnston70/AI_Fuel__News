@@ -5,7 +5,6 @@ import concurrent.futures
 import pandas as pd
 from clean_data import extract_and_clean_data
 
-# Helper to fetch a single feed and return entries in dict format
 def fetch_single_feed(link_source_tuple):
     link, source = link_source_tuple
     entries = {"Title": [], "Link": [], "Published": [], "Description": [], "Source": []}
@@ -23,7 +22,6 @@ def fetch_single_feed(link_source_tuple):
 
     return entries
 
-# Pull all feeds in parallel using threads
 def fetch_feed(links):
     all_entries = {"Title": [], "Link": [], "Published": [], "Description": [], "Source": []}
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
@@ -42,10 +40,9 @@ def fetch_feed(links):
     df = pd.DataFrame(all_entries)
     return df
 
-# Main logic to fetch and clean all feeds
 def main():
     links = {
-        # AI Industry Feeds
+        # AI Industry
         "https://bair.berkeley.edu/blog/feed.xml": "The Berkeley Artificial Intelligence Research Blog",
         "https://feeds.feedburner.com/nvidiablog": "NVDIA Blog",
         "https://www.microsoft.com/en-us/research/feed/": "Microsoft Research",
@@ -59,7 +56,7 @@ def main():
         "https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_ollama.xml": "Ollama Blog",
         "https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_anthropic.xml": "Anthropic News",
 
-        # Fuel Industry Feeds
+        # Fuel & Energy
         "https://www.eia.gov/rss/pressreleases.xml": "EIA Press Releases",
         "https://www.api.org/rss/feed": "API News",
         "https://www.convenience.org/RSS-Feeds/News-Releases": "NACS News",
@@ -68,13 +65,32 @@ def main():
         "https://feeds.marketwatch.com/marketwatch/energy": "MarketWatch Energy",
         "https://www.bloomberg.com/feeds/bpol/news-energy.xml": "Bloomberg Energy News",
 
-        # ERP & Automation
+        # Colorado Traffic & Weather
+        "https://www.codot.gov/news/feeds/statewide/RSS": "Colorado Traffic",
+        "https://alerts.weather.gov/cap/co.php?x=0": "Colorado Weather",
+
+        # ERP & Automation / Medium Tags
         "https://techcrunch.com/tag/enterprise/feed/": "TechCrunch Enterprise",
         "https://venturebeat.com/category/data-ai/feed/": "VentureBeat – Data and AI",
         "https://www.ciodive.com/rss/": "CIO Dive",
         "https://workspaceupdates.googleblog.com/feeds/posts/default": "Google Workspace Blog",
         "https://developer.intuit.com/blog/feed": "Intuit Developer Blog",
-        "https://stackoverflow.com/feeds/tag?tagnames=google-apps-script&sort=newest": "Stack Overflow - Apps Script"
+        "https://stackoverflow.com/feeds/tag?tagnames=google-apps-script&sort=newest": "Stack Overflow - Apps Script",
+
+        # Medium Tags
+        "https://medium.com/feed/tag/python": "Medium: Python",
+        "https://medium.com/feed/tag/ai": "Medium: AI",
+        "https://medium.com/feed/tag/quickbooks": "Medium: QuickBooks",
+        "https://medium.com/feed/tag/erp": "Medium: ERP",
+        "https://medium.com/feed/tag/streamlit": "Medium: Streamlit",
+        "https://medium.com/feed/tag/machine-learning": "Medium: Machine Learning",
+        "https://medium.com/feed/tag/data-visualization": "Medium: Data Visualization",
+        "https://medium.com/feed/tag/business-intelligence": "Medium: Business Intelligence",
+        "https://medium.com/feed/tag/quickbooks-online": "Medium: QuickBooks Online",
+
+        # Placeholder for DTN (if they allow public RSS access)
+        # If you have DTN credentials or a custom feed, insert it here
+        # "https://your-dtn-feed-url.xml": "DTN Market Feed"
     }
 
     raw_df = fetch_feed(links)
