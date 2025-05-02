@@ -165,7 +165,7 @@ with left_col:
                 st.text_area(f"💬 Leave a comment on {title}", placeholder="Thoughts or questions here...", key=f"comment_{key_prefix}")
 
         ai_sources = [s for s in df['Source'].unique() if "AI" in s or "Anthropic" in s or "DeepMind" in s or "OpenAI" in s]
-        fuel_sources = [s for s in df['Source'].unique() if "Oil" in s or "Bloomberg" in s or "Reuters" in s or "EIA" in s]
+        fuel_sources = [s for s in df['Source'].unique() if "Oil" in s or "Bloomberg" in s or "Reuters" in s or "EIA" in s or "Colorado Traffic" in s or "Colorado Weather" in s or "DTN" in s].unique() if "Oil" in s or "Bloomberg" in s or "Reuters" in s or "EIA" in s]
         erp_sources = [
             "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
             "Google Workspace Blog", "Intuit Developer Blog", "Stack Overflow - Apps Script",
