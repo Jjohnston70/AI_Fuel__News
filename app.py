@@ -172,8 +172,15 @@ with left_col:
         erp_sources = [
             "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
             "Google Workspace Blog", "Intuit Developer Blog", "Stack Overflow - Apps Script",
-            "https://medium.com/feed/tag/python", "https://medium.com/feed/tag/ai", "https://medium.com/feed/tag/quickbooks", "https://medium.com/feed/tag/erp", "https://medium.com/feed/tag/streamlit", "https://medium.com/feed/tag/machine-learning", "https://medium.com/feed/tag/data-visualization", "https://medium.com/feed/tag/business-intelligence", "https://medium.com/feed/tag/quickbooks-online"
+            "Medium: AI", "Medium: QuickBooks", "Medium: ERP",
+            "Medium: Streamlit", "Medium: Machine Learning", "Medium: Data Visualization",
+            "Medium: Business Intelligence", "Medium: QuickBooks Online",
+            "Medium: Firebase", "Medium: No-Code Development"
         ]
+
+        news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
+        news_section(" 🧠 AI Industry News", ai_sources, "ai")
+        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
 
         news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
