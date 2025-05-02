@@ -125,17 +125,26 @@ with left_col:
 
     df = main()
 
+        # Debug: Show feed counts by source
+        if st.sidebar.checkbox("🧪 Show Feed Counts", value=False):
+            feed_counts = df['Source'].value_counts().reset_index()
+            feed_counts.columns = ["Source", "# of Articles"]
+            st.sidebar.dataframe(feed_counts)
+
     if df.empty:
         st.error("No news data available. Please try refreshing later.")
     else:
         def news_section(title, source_list, key_prefix):
             st.markdown(f"<div class='section-title'>{title}</div>", unsafe_allow_html=True)
             df_filtered = df[df['Source'].isin(source_list)]
+            if df_filtered.empty:
+                st.info(f"No recent articles from these sources. Showing older content.")
+                df_filtered = df[df['Source'].isin(source_list)].sort_values(by='date', ascending=False).head(10)
             if not df_filtered.empty:
                 col1, col2 = st.columns(2)
                 with col1:
                     min_d, max_d = df_filtered['date'].min(), df_filtered['date'].max()
-                    selected_dates = st.date_input(f"Date Range", (min_d, max_d), key=f"{key_prefix}_dates")
+                    selected_dates = st.date_input(f"{title} - Date Range", (min_d, max_d), key=f"{key_prefix}_dates")
                     start_d, end_d = selected_dates if len(selected_dates) > 1 else (selected_dates[0], selected_dates[0])
                 with col2:
                     sources = ["All"] + sorted(df_filtered['Source'].unique())
@@ -165,9 +174,3 @@ with left_col:
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
         news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
         news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
-
-
-        news_section(" 🧠 AI Industry News", ai_sources, "ai")
-        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
-        news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
-
