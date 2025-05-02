@@ -168,6 +168,8 @@ with left_col:
         fuel_sources = [
             s for s in df['Source'].unique()
             if any(x in s for x in ["Oil", "Bloomberg", "Reuters", "EIA", "Colorado Traffic", "Colorado Weather", "DTN"])
+        ].unique()
+            if any(x in s for x in ["Oil", "Bloomberg", "Reuters", "EIA", "Colorado Traffic", "Colorado Weather", "DTN"])
         ]
         erp_sources = [
             "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
