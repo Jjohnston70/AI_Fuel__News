@@ -182,7 +182,5 @@ with left_col:
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
         news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
 
-        news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
-        news_section(" 🧠 AI Industry News", ai_sources, "ai")
-        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
+
 
