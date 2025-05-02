@@ -1,4 +1,4 @@
-# Updated version of your app with additional RSS feed sections and fixed theme toggle
+# Updated version of your app with fixed light/dark theme toggling using Streamlit native settings
 
 import streamlit as st
 import pandas as pd
@@ -27,19 +27,19 @@ with st.sidebar.expander("ℹ️ How Theme Works"):
     Dashboard appearance updates instantly!
     """)
 
-# --- CSS Styling ---
+# --- CSS Styling Fix ---
+# Apply theme-specific styling directly to elements that Streamlit renders
 base_color = "#0A0A0A" if mode == "Dark" else "#FFFFFF"
 text_color = "white" if mode == "Dark" else "black"
 section_color = "#FF4136" if mode == "Dark" else "#8B0000"
 rightbar_bg = base_color
 
+# --- Entire Theme Styling (fixes visual issues with body override) ---
 custom_styles = f"""
 <style>
-body {{
-    background-color: {base_color};
-    color: {text_color};
-    margin: 0;
-    padding: 0;
+html, body, [class*="st-"], .stApp {{
+    background-color: {base_color} !important;
+    color: {text_color} !important;
 }}
 body::before, body::after {{
     content: "";
@@ -102,6 +102,7 @@ body::after {{ right: 0; }}
 }}
 </style>
 """
+
 st.markdown(custom_styles, unsafe_allow_html=True)
 
 # --- Layout: Main & Right Column ---
@@ -127,7 +128,6 @@ with left_col:
     if df.empty:
         st.error("No news data available. Please try refreshing later.")
     else:
-        # Define sections with shared logic
         def news_section(title, source_list, key_prefix):
             st.markdown(f"<div class='section-title'>{title}</div>", unsafe_allow_html=True)
             df_filtered = df[df['Source'].isin(source_list)]
@@ -155,13 +155,17 @@ with left_col:
                         st.warning("No news found for that range.")
                 st.text_area(f"💬 Leave a comment on {title}", placeholder="Thoughts or questions here...", key=f"comment_{key_prefix}")
 
-        # --- Sections ---
         ai_sources = [s for s in df['Source'].unique() if "AI" in s or "Anthropic" in s or "DeepMind" in s or "OpenAI" in s]
         fuel_sources = [s for s in df['Source'].unique() if "Oil" in s or "Bloomberg" in s or "Reuters" in s or "EIA" in s]
         erp_sources = [
             "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
             "Google Workspace Blog", "Intuit Developer Blog", "Stack Overflow - Apps Script"
         ]
+
+        news_section(" 🧠 AI Industry News", ai_sources, "ai")
+        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
+        news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
+
 
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
         news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
