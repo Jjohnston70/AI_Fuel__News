@@ -177,10 +177,10 @@ with left_col:
             "Medium: Business Intelligence", "Medium: QuickBooks Online",
             "Medium: Firebase", "Medium: No-Code Development"
         ]
-
+        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
         news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
         news_section(" 🧠 AI Industry News", ai_sources, "ai")
-        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
+        
 
 
 
