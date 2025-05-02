@@ -126,7 +126,7 @@ with left_col:
     df = main()
 
     # Debug: Show feed counts by source
-        if st.sidebar.checkbox("🧪 Show Feed Counts", value=False):
+    if st.sidebar.checkbox("🧪 Show Feed Counts", value=False):
             feed_counts = df['Source'].value_counts().reset_index()
             feed_counts.columns = ["Source", "# of Articles"]
             st.sidebar.dataframe(feed_counts)
