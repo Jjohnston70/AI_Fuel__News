@@ -87,6 +87,9 @@ def main():
         "https://medium.com/feed/tag/data-visualization": "Medium: Data Visualization",
         "https://medium.com/feed/tag/business-intelligence": "Medium: Business Intelligence",
         "https://medium.com/feed/tag/quickbooks-online": "Medium: QuickBooks Online",
+        "https://medium.com/feed/tag/firebase": "Medium: Firebase",
+        "https://medium.com/feed/tag/no-code": "Medium: No-Code Development",
+
 
         # Placeholder for DTN (if they allow public RSS access)
         # If you have DTN credentials or a custom feed, insert it here
