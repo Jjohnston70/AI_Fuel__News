@@ -19,6 +19,8 @@ Filter news articles by source and date range
 
 Leave comments and feedback for each section
 
+Access TrueNorth's website and social media directly
+
 Fully customized with side logos, hover effects, a manual theme switcher, and even glow effects for that extra pizzazz. 🎉
 
 🗂️ Project Structure
@@ -98,6 +100,7 @@ app.py renders the dashboard beautifully with:
 - Date range and source filters
 - Manual data refresh button
 - User comment boxes
+- Links to TrueNorth's website and Facebook page
 
 🖼️ Screenshot
 (Drop a nice screenshot here if you want more brownie points.)
@@ -111,6 +114,7 @@ app.py renders the dashboard beautifully with:
 - ✨ Logo sidebar, hover effects, soft glows, and footer credits
 - 🔄 Manual data refresh to get the latest news instantly
 - 🌐 Vercel deployment ready
+- 🔗 Direct links to TrueNorth's online presence
 
 🔮 Future Improvements
 - Email notifications when new news is posted
@@ -121,3 +125,7 @@ app.py renders the dashboard beautifully with:
 
 🤖 Credits
 Built by TrueNorth Data Strategies Team
+
+📱 Connect with TrueNorth
+- 🌐 [Website](https://www.truenorthstrategyops.com/)
+- 📘 [Facebook](https://www.facebook.com/profile.php?viewas=100000686899395&id=61577047841328)

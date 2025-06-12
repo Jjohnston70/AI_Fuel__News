@@ -101,6 +101,22 @@ body::after {{ right: 0; }}
     flex-direction: column;
     justify-content: space-between;
 }}
+.social-links {{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}}
+.social-links a {{
+    color: #0078D4;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}}
+.social-links a:hover {{
+    text-decoration: underline;
+}}
 @media only screen and (max-width: 768px) {{
     .title {{ font-size: 36px; }}
     .section-title {{ font-size: 24px; }}
@@ -118,6 +134,13 @@ with right_col:
     st.markdown("<div class='rightbar'>", unsafe_allow_html=True)
     if truenorth_logo:
         st.image(truenorth_logo, width=180)
+    
+    # Social links
+    st.markdown("<div class='social-links'>", unsafe_allow_html=True)
+    st.markdown("<a href='https://www.truenorthstrategyops.com/' target='_blank'>🌐 Visit Our Website</a>", unsafe_allow_html=True)
+    st.markdown("<a href='https://www.facebook.com/profile.php?viewas=100000686899395&id=61577047841328' target='_blank'>📱 Follow on Facebook</a>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+    
     st.markdown("<div style='flex-grow: 1;'></div>", unsafe_allow_html=True)
     st.markdown("<div class='footer'>Built by True North Data Strategies</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
