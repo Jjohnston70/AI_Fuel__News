@@ -5,7 +5,6 @@ import pandas as pd
 from fetch_data import main
 from PIL import Image
 import os
-from database import save_comment, get_comments
 
 # --- Load logos ---
 try:
@@ -118,25 +117,6 @@ body::after {{ right: 0; }}
 .social-links a:hover {{
     text-decoration: underline;
 }}
-.comment-box {{
-    background-color: rgba(0, 120, 212, 0.1);
-    border-left: 3px solid #0078D4;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 0 5px 5px 0;
-}}
-.comment-user {{
-    font-weight: bold;
-    margin-bottom: 5px;
-}}
-.comment-date {{
-    font-size: 0.8em;
-    color: #888;
-    margin-bottom: 5px;
-}}
-.comment-text {{
-    margin-top: 5px;
-}}
 @media only screen and (max-width: 768px) {{
     .title {{ font-size: 36px; }}
     .section-title {{ font-size: 24px; }}
@@ -215,36 +195,6 @@ with left_col:
                             st.markdown("---")
                     else:
                         st.warning("No news found for that range.")
-                
-                # Comments Section
-                with st.expander("💬 Comments", expanded=True):
-                    # Display existing comments
-                    comments_df = get_comments(section=key_prefix)
-                    if not comments_df.empty:
-                        st.subheader("Previous Comments")
-                        for _, comment_row in comments_df.iterrows():
-                            st.markdown(f"""
-                            <div class="comment-box">
-                                <div class="comment-user">{comment_row['user_name']}</div>
-                                <div class="comment-date">{pd.to_datetime(comment_row['created_at']).strftime('%Y-%m-%d %H:%M')}</div>
-                                <div class="comment-text">{comment_row['comment']}</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                    
-                    # New comment form
-                    st.subheader("Add Your Comment")
-                    with st.form(key=f"comment_form_{key_prefix}"):
-                        user_name = st.text_input("Your Name (optional)", value="Anonymous", key=f"name_{key_prefix}")
-                        comment = st.text_area("Your Comment", key=f"comment_{key_prefix}", placeholder="Share your thoughts...")
-                        submit_button = st.form_submit_button("Submit Comment")
-                        
-                        if submit_button:
-                            success, message = save_comment(key_prefix, comment, user_name)
-                            if success:
-                                st.success(message)
-                                st.rerun()  # Refresh to show new comment
-                            else:
-                                st.error(message)
 
         # Define source lists for each section
         ai_sources = [
