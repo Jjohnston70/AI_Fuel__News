@@ -8,7 +8,7 @@ import os
 
 # --- Load logos ---
 try:
-    image_path = os.path.join(os.path.dirname(__file__), "images/TN_logo (1).jpg")
+    image_path = os.path.join(os.path.dirname(__file__), "images/truenorth_logo.jpg")
     truenorth_logo = Image.open(image_path)
 except Exception as e:
     st.warning(f"Failed to load logo: {e}")
