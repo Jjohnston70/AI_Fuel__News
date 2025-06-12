@@ -1,18 +1,23 @@
-# Updated version of your app with fixed light/dark theme toggling using Streamlit native settings
+# Updated version of your app with TrueNorth colors and modified sections
 
 import streamlit as st
 import pandas as pd
 from fetch_data import main
 from PIL import Image
+import os
 
 # --- Load logos ---
-chief_logo = Image.open("images/Chief_Logo.png")
-truenorth_logo = Image.open("images/TrueNorthLogo.jpg")
+try:
+    image_path = os.path.join(os.path.dirname(__file__), "images/TN_logo (1).jpg")
+    truenorth_logo = Image.open(image_path)
+except Exception as e:
+    st.warning(f"Failed to load logo: {e}")
+    truenorth_logo = None
 
 # --- Streamlit Page Config ---
 st.set_page_config(
-    page_title="Chief Petroleum | News Dashboard",
-    page_icon="⛽",
+    page_title="TrueNorth | News Dashboard",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -31,7 +36,8 @@ with st.sidebar.expander("ℹ️ How Theme Works"):
 # Apply theme-specific styling directly to elements that Streamlit renders
 base_color = "#0A0A0A" if mode == "Dark" else "#FFFFFF"
 text_color = "white" if mode == "Dark" else "black"
-section_color = "#FF4136" if mode == "Dark" else "#8B0000"
+# TrueNorth blue colors
+section_color = "#0078D4" if mode == "Dark" else "#004E8C"
 rightbar_bg = base_color
 
 # --- Entire Theme Styling (fixes visual issues with body override) ---
@@ -47,23 +53,23 @@ body::before, body::after {{
     top: 0;
     width: 5px;
     height: 100%;
-    background: #8B0000;
+    background: #0078D4;
     z-index: 1;
 }}
 body::before {{ left: 0; }}
 body::after {{ right: 0; }}
 .stButton > button {{
-    background-color: #8B0000;
+    background-color: #0078D4;
     color: white;
     font-weight: bold;
     border-radius: 8px;
     height: 3em;
     width: 100%;
-    box-shadow: 0 0 5px #8B0000;
+    box-shadow: 0 0 5px #0078D4;
 }}
 .stButton > button:hover {{
-    background-color: #A80000;
-    box-shadow: 0 0 15px #FF4136;
+    background-color: #005EA8;
+    box-shadow: 0 0 15px #0078D4;
 }}
 .title {{
     text-align: center;
@@ -88,7 +94,7 @@ body::after {{ right: 0; }}
 }}
 .rightbar {{
     padding-left: 20px;
-    border-left: 5px solid #8B0000;
+    border-left: 5px solid #0078D4;
     background-color: {rightbar_bg};
     height: 100%;
     display: flex;
@@ -110,20 +116,24 @@ left_col, right_col = st.columns([8, 2])
 
 with right_col:
     st.markdown("<div class='rightbar'>", unsafe_allow_html=True)
-    st.image(chief_logo, width=180)
+    if truenorth_logo:
+        st.image(truenorth_logo, width=180)
     st.markdown("<div style='flex-grow: 1;'></div>", unsafe_allow_html=True)
-    st.image(truenorth_logo, width=80)
-    st.markdown("<div class='footer'>Built by Jacob Johnston | True North Data Strategies</div>", unsafe_allow_html=True)
+    st.markdown("<div class='footer'>Built by True North Data Strategies</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with left_col:
-    st.markdown("<div class='title'>Chief Petroleum<br>Fuel, ERP & AI Industry News Dashboard</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title'>TrueNorth Data Strategies<br>AI & Automation Industry News Dashboard</div>", unsafe_allow_html=True)
 
     if st.button("🔄 Refresh Data"):
         st.cache_data.clear()
         st.rerun()
 
-    df = main()
+    @st.cache_data(ttl=3600)  # Cache for 1 hour
+    def load_data():
+        return main()
+
+    df = load_data()
 
     # Debug: Show feed counts by source
     if st.sidebar.checkbox("🧪 Show Feed Counts", value=False):
@@ -164,23 +174,30 @@ with left_col:
                         st.warning("No news found for that range.")
                 st.text_area(f"💬 Leave a comment on {title}", placeholder="Thoughts or questions here...", key=f"comment_{key_prefix}")
 
-        ai_sources = [s for s in df['Source'].unique() if "AI" in s or "Anthropic" in s or "DeepMind" in s or "OpenAI" in s]
-        fuel_sources = [
-            s for s in df['Source'].unique()
-            if any(x in s for x in ["Oil", "Bloomberg", "Reuters", "EIA", "Colorado Traffic", "Colorado Weather", "DTN"])
+        # Define source lists for each section
+        ai_sources = [
+            s for s in df['Source'].unique() 
+            if any(x in s for x in ["AI", "Artificial Intelligence", "Anthropic", "DeepMind", "OpenAI", "TechCrunch AI"])
         ]
-        erp_sources = [
-            "TechCrunch Enterprise", "VentureBeat – Data and AI", "CIO Dive",
-            "Google Workspace Blog", "Intuit Developer Blog", "Stack Overflow - Apps Script",
-            "Medium: AI", "Medium: QuickBooks", "Medium: ERP",
-            "Medium: Streamlit", "Medium: Machine Learning", "Medium: Data Visualization",
-            "Medium: Business Intelligence", "Medium: QuickBooks Online",
-            "Medium: Firebase", "Medium: No-Code Development"
-        ]
-        news_section(" 🚛 Fuel & Energy News", fuel_sources, "fuel")
-        news_section(" 📈 ERP & Automation Feeds", erp_sources, "erp")
-        news_section(" 🧠 AI Industry News", ai_sources, "ai")
         
+        automation_sources = [
+            s for s in df['Source'].unique()
+            if any(x in s for x in ["Automation", "CIO", "Industry", "Engineering", "Design News", "Control"])
+        ]
+        
+        medium_sources = [
+            s for s in df['Source'].unique()
+            if "Medium:" in s
+        ]
+
+        # Display sections
+        news_section(" 🧠 AI Industry News", ai_sources, "ai")
+        news_section(" 🤖 Automation Feeds", automation_sources, "automation")
+        news_section(" 📝 Medium.com Articles", medium_sources, "medium")
+
+if __name__ == "__main__":
+    # This allows the app to run both on Vercel and locally
+    pass
 
 
 

@@ -42,58 +42,41 @@ def fetch_feed(links):
 
 def main():
     links = {
-        # AI Industry
-        "https://bair.berkeley.edu/blog/feed.xml": "The Berkeley Artificial Intelligence Research Blog",
+        # AI Industry News
+        "https://www.artificialintelligence-news.com/feed/": "Artificial Intelligence News",
+        "https://techcrunch.com/category/artificial-intelligence/feed/": "TechCrunch AI",
+        "https://bair.berkeley.edu/blog/feed.xml": "Berkeley AI Research Blog",
         "https://feeds.feedburner.com/nvidiablog": "NVDIA Blog",
-        "https://www.microsoft.com/en-us/research/feed/": "Microsoft Research",
-        "https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml": "Science Daily",
-        "https://research.facebook.com/feed/": "META Research",
         "https://openai.com/news/rss.xml": "OpenAI News",
         "https://deepmind.google/blog/feed/basic/": "Google DeepMind Blog",
-        "https://news.mit.edu/rss/topic/artificial-intelligence2": "MIT News - Artificial intelligence",
-        "https://www.technologyreview.com/topic/artificial-intelligence/feed": "MIT Technology Review - Artificial intelligence",
-        "https://www.wired.com/feed/tag/ai/latest/rss": "Wired: Artificial Intelligence Latest",
-        "https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_ollama.xml": "Ollama Blog",
+        "https://news.mit.edu/rss/topic/artificial-intelligence2": "MIT News - AI",
+        "https://www.technologyreview.com/topic/artificial-intelligence/feed": "MIT Technology Review - AI",
+        "https://www.wired.com/feed/tag/ai/latest/rss": "Wired: AI Latest",
         "https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_anthropic.xml": "Anthropic News",
 
-        # Fuel & Energy
-        "https://www.eia.gov/rss/pressreleases.xml": "EIA Press Releases",
-        "https://www.api.org/rss/feed": "API News",
-        "https://www.convenience.org/RSS-Feeds/News-Releases": "NACS News",
-        "https://oilprice.com/rss/main": "OilPrice.com Energy News",
-        "https://www.reutersagency.com/feed/?best-topics=commodities-energy": "Reuters Commodities Energy",
-        "https://feeds.marketwatch.com/marketwatch/energy": "MarketWatch Energy",
-        "https://www.bloomberg.com/feeds/bpol/news-energy.xml": "Bloomberg Energy News",
-
-        # Colorado Traffic & Weather
-        "https://www.codot.gov/news/feeds/statewide/RSS": "Colorado Traffic",
-        "https://alerts.weather.gov/cap/co.php?x=0": "Colorado Weather",
-
-        # ERP & Automation / Medium Tags
-        "https://techcrunch.com/tag/enterprise/feed/": "TechCrunch Enterprise",
-        "https://venturebeat.com/category/data-ai/feed/": "VentureBeat – Data and AI",
+        # Automation Feeds
+        "https://www.automationworld.com/rss/all": "Automation World",
+        "https://www.automationanywhere.com/company/press-room/rss.xml": "Automation Anywhere",
         "https://www.ciodive.com/rss/": "CIO Dive",
-        "https://workspaceupdates.googleblog.com/feeds/posts/default": "Google Workspace Blog",
-        "https://developer.intuit.com/blog/feed": "Intuit Developer Blog",
-        "https://stackoverflow.com/feeds/tag?tagnames=google-apps-script&sort=newest": "Stack Overflow - Apps Script",
-
-        # Medium Tags
+        "https://www.industryweek.com/taxonomy/term/6786/feed": "IndustryWeek Automation",
+        "https://www.machinedesign.com/taxonomy/term/28301/feed": "Machine Design Automation",
+        "https://www.controleng.com/rss/topic/5348": "Control Engineering",
+        "https://www.designnews.com/taxonomy/term/43261/feed": "Design News - Automation",
+        
+        # Medium.com Feeds
         "https://medium.com/feed/tag/python": "Medium: Python",
         "https://medium.com/feed/tag/ai": "Medium: AI",
-        "https://medium.com/feed/tag/quickbooks": "Medium: QuickBooks",
-        "https://medium.com/feed/tag/erp": "Medium: ERP",
-        "https://medium.com/feed/tag/streamlit": "Medium: Streamlit",
         "https://medium.com/feed/tag/machine-learning": "Medium: Machine Learning",
         "https://medium.com/feed/tag/data-visualization": "Medium: Data Visualization",
         "https://medium.com/feed/tag/business-intelligence": "Medium: Business Intelligence",
-        "https://medium.com/feed/tag/quickbooks-online": "Medium: QuickBooks Online",
-        "https://medium.com/feed/tag/firebase": "Medium: Firebase",
-        "https://medium.com/feed/tag/no-code": "Medium: No-Code Development",
-
-
-        # Placeholder for DTN (if they allow public RSS access)
-        # If you have DTN credentials or a custom feed, insert it here
-        # "https://your-dtn-feed-url.xml": "DTN Market Feed"
+        "https://medium.com/feed/tag/automation": "Medium: Automation",
+        "https://medium.com/feed/tag/data-science": "Medium: Data Science",
+        "https://medium.com/feed/tag/programming": "Medium: Programming",
+        "https://medium.com/feed/tag/technology": "Medium: Technology",
+        "https://medium.com/feed/tag/software-development": "Medium: Software Development",
+        "https://medium.com/feed/tag/coding": "Medium: Coding",
+        "https://medium.com/feed/tag/web-development": "Medium: Web Development",
+        "https://medium.com/feed/tag/productivity": "Medium: Productivity",
     }
 
     raw_df = fetch_feed(links)
