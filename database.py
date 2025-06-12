@@ -1,10 +1,21 @@
 from supabase import create_client
 import pandas as pd
 import streamlit as st
+import os
 
-# Get Supabase credentials from Streamlit secrets
-supabase_url = st.secrets["SUPABASE"]["SUPABASE_URL"]
-supabase_key = st.secrets["SUPABASE"]["SUPABASE_KEY"]
+# Try to get Supabase credentials from Streamlit secrets (Cloud)
+supabase_url = None
+supabase_key = None
+
+if "SUPABASE" in st.secrets:
+    supabase_url = st.secrets["SUPABASE"].get("SUPABASE_URL")
+    supabase_key = st.secrets["SUPABASE"].get("SUPABASE_KEY")
+else:
+    # Fallback to environment variables (local .env)
+    from dotenv import load_dotenv
+    load_dotenv()
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_key = os.getenv("SUPABASE_KEY")
 
 @st.cache_resource
 def init_connection():
